@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Spark基础环境配置教程 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="一、实验目的 掌握Spark运行核心依赖环境（JDK、Scala）的安装与环境变量配置方法。 完成Spark 3.5.0单机版的解压、配置，实现基础环境的可用性验证。 熟悉Spark Shell交互式工具的使用，为后续集群模式部署和应用开发铺垫基础。 理解Spark与JDK、Scala的版本兼容原则，规避基础环境配置的常见问题。  二、实验环境   软件&#x2F;环境 版本 运行系统 说明">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark基础环境配置教程">
+<meta property="og:url" content="http://example.com/2026/04/20/Spark%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、实验目的 掌握Spark运行核心依赖环境（JDK、Scala）的安装与环境变量配置方法。 完成Spark 3.5.0单机版的解压、配置，实现基础环境的可用性验证。 熟悉Spark Shell交互式工具的使用，为后续集群模式部署和应用开发铺垫基础。 理解Spark与JDK、Scala的版本兼容原则，规避基础环境配置的常见问题。  二、实验环境   软件&#x2F;环境 版本 运行系统 说明">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-04-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-04-20T16:43:43.847Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Spark">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="环境配置">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Spark基础环境配置教程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/04/20/Spark%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/" class="article-date">
+  <time class="dt-published" datetime="2026-04-19T16:00:00.000Z" itemprop="datePublished">2026-04-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Spark基础环境配置教程
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="一、实验目的"><a href="#一、实验目的" class="headerlink" title="一、实验目的"></a>一、实验目的</h2><ol>
+<li>掌握Spark运行核心依赖环境（JDK、Scala）的安装与环境变量配置方法。</li>
+<li>完成Spark 3.5.0单机版的解压、配置，实现基础环境的可用性验证。</li>
+<li>熟悉Spark Shell交互式工具的使用，为后续集群模式部署和应用开发铺垫基础。</li>
+<li>理解Spark与JDK、Scala的版本兼容原则，规避基础环境配置的常见问题。</li>
+</ol>
+<h2 id="二、实验环境"><a href="#二、实验环境" class="headerlink" title="二、实验环境"></a>二、实验环境</h2><table>
+<thead>
+<tr>
+<th>软件&#x2F;环境</th>
+<th>版本</th>
+<th>运行系统</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JDK</td>
+<td>1.8.0_301</td>
+<td>CentOS 7 &#x2F; Win10</td>
+<td>Spark官方推荐基础JDK版本</td>
+</tr>
+<tr>
+<td>Scala</td>
+<td>2.12.15</td>
+<td>CentOS 7 &#x2F; Win10</td>
+<td>与Spark 3.x系列完美兼容</td>
+</tr>
+<tr>
+<td>Spark</td>
+<td>3.5.0-bin-hadoop3</td>
+<td>CentOS 7 &#x2F; Win10</td>
+<td>适配Hadoop 3.x的稳定版</td>
+</tr>
+<tr>
+<td>环境变量配置</td>
+<td>系统级&#x2F;profile</td>
+<td>CentOS 7 &#x2F; Win10</td>
+<td>全局生效，所有用户可访问</td>
+</tr>
+</tbody></table>
+<h2 id="三、实验步骤"><a href="#三、实验步骤" class="headerlink" title="三、实验步骤"></a>三、实验步骤</h2><h3 id="1-JDK环境安装与配置"><a href="#1-JDK环境安装与配置" class="headerlink" title="1. JDK环境安装与配置"></a>1. JDK环境安装与配置</h3><h4 id="1-1-解压安装包"><a href="#1-1-解压安装包" class="headerlink" title="1.1 解压安装包"></a>1.1 解压安装包</h4><p>将下载的JDK压缩包解压至指定目录（以CentOS 7为例）：</p>
+<pre><code class="bash"># 解压到/usr/local/目录
+tar -zxvf jdk-8u301-linux-x64.tar.gz -C /usr/local/
+# 重命名文件夹（方便后续配置）
+mv /usr/local/jdk1.8.0_301 /usr/local/jdk1.8
+1.2 配置系统环境变量
+# 编辑系统环境变量文件
+vim /etc/profile
+# 在文件末尾添加以下配置
+export JAVA_HOME=/usr/local/jdk1.8
+export JRE_HOME=$JAVA_HOME/jre
+export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib
+export PATH=$PATH:$JAVA_HOME/bin
+# 使配置立即生效
+source /etc/profile
+1.3 验证 JDK 安装
+# 执行命令查看版本
+java -version
+# 成功输出如下信息即为配置完成
+java version &quot;1.8.0_301&quot;
+Java(TM) SE Runtime Environment (build 1.8.0_301-b09)
+Java HotSpot(TM) 64-Bit Server VM (build 25.301-b09, mixed mode)
+2. Scala 环境安装与配置
+2.1 解压安装包
+# 解压Scala压缩包到/usr/local/目录
+tar -zxvf scala-2.12.15.tgz -C /usr/local/
+# 重命名文件夹
+mv /usr/local/scala-2.12.15 /usr/local/scala
+2.2 配置系统环境变量
+# 编辑/etc/profile文件
+vim /etc/profile
+# 末尾添加以下配置
+export SCALA_HOME=/usr/local/scala
+export PATH=$PATH:$SCALA_HOME/bin
+# 使配置生效
+source /etc/profile
+2.3 验证 Scala 安装
+# 执行命令查看版本
+scala -version
+# 成功输出如下信息即为配置完成
+Scala code runner version 2.12.15 -- Copyright 2002-2021, LAMP/EPFL
+3. Spark 单机版安装与配置
+3.1 解压 Spark 安装包
+# 解压Spark包到/usr/local/目录
+tar -zxvf spark-3.5.0-bin-hadoop3.tgz -C /usr/local/
+# 重命名文件夹
+mv /usr/local/spark-3.5.0-bin-hadoop3 /usr/local/spark
+3.2 配置 Spark 环境变量
+# 编辑/etc/profile文件
+vim /etc/profile
+# 末尾添加以下配置
+export SPARK_HOME=/usr/local/spark
+export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
+# 使配置生效
+source /etc/profile
+3.3 修改 Spark 核心配置文件
+# 进入Spark配置目录
+cd $SPARK_HOME/conf
+# 复制配置模板为正式配置文件
+cp spark-env.sh.template spark-env.sh
+# 编辑配置文件，指定JDK路径
+vim spark-env.sh
+# 在文件开头添加
+export JAVA_HOME=/usr/local/jdk1.8
+4. Spark 环境可用性验证
+4.1 启动 Spark Shell 交互式工具
+# 直接执行命令启动
+spark-shell
+# 成功启动后进入Scala交互界面，显示Spark版本和Web UI地址
+4.2 执行简单 RDD 操作验证
+# 创建一个简单的RDD并执行计算
+val rdd = sc.parallelize(1 to 10)  // 创建1-10的分布式数据集
+val sum = rdd.sum()                // 计算数据集总和
+println(&quot;RDD求和结果：&quot; + sum)     // 输出结果
+# 成功输出「RDD求和结果：55.0」即为环境完全可用
+4.3 退出 Spark Shell
+:quit  // 执行退出命令
+四、实验常见问题与解决
+1.环境变量配置后验证失败：检查/etc/profile文件中路径是否正确，是否执行source /etc/profile生效，重启终端重试。
+2.Spark Shell 启动提示 Java 未找到：确认spark-env.sh中JAVA_HOME路径与实际 JDK 安装路径一致，无拼写错误。
+3.Scala 版本不兼容：Spark 3.x 仅支持 Scala 2.12.x 系列，避免使用 2.11.x 或 2.13.x 版本。
+五、实验总结
+本次实验完成了 Spark 基础运行环境的全流程配置，掌握了 JDK、Scala、Spark 的逐层依赖配置逻辑，明确了版本兼容的核心原则。通过 Spark Shell 的 RDD 简单操作，验证了基础环境的可用性，解决了环境配置中的常见路径、环境变量生效问题，为后续 Spark Local 模式、Standalone 集群模式的部署奠定了坚实的基础。
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/04/20/Spark%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/" data-id="cmo7fds8w0004hc7de3ft0unj" data-title="Spark基础环境配置教程" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spark/" rel="tag">Spark</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2026/04/20/Spark-HA%E4%B8%8EYarn%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Spark HA与Yarn模式配置
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HA/" rel="tag">HA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Local%E6%A8%A1%E5%BC%8F/" rel="tag">Local模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spark/" rel="tag">Spark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Standalone/" rel="tag">Standalone</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/YARN/" rel="tag">YARN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%83%A8%E7%BD%B2/" rel="tag">分布式部署</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="tag">环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/" rel="tag">集群部署</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/" rel="tag">高可用</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/HA/" style="font-size: 10px;">HA</a> <a href="/tags/Local%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">Local模式</a> <a href="/tags/Spark/" style="font-size: 20px;">Spark</a> <a href="/tags/Standalone/" style="font-size: 10px;">Standalone</a> <a href="/tags/YARN/" style="font-size: 10px;">YARN</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%83%A8%E7%BD%B2/" style="font-size: 10px;">分布式部署</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 10px;">大数据</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">环境配置</a> <a href="/tags/%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/" style="font-size: 10px;">集群部署</a> <a href="/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/" style="font-size: 10px;">高可用</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/04/">April 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/04/20/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2026/04/20/Spark-Local%E4%B8%8EStandalone%E6%A8%A1%E5%BC%8F%E9%83%A8%E7%BD%B2/">Spark Local与Standalone模式部署</a>
+          </li>
+        
+          <li>
+            <a href="/2026/04/20/Spark-HA%E4%B8%8EYarn%E6%A8%A1%E5%BC%8F%E9%85%8D%E7%BD%AE/">Spark HA与Yarn模式配置</a>
+          </li>
+        
+          <li>
+            <a href="/2026/04/20/Spark%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/">Spark基础环境配置教程</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
